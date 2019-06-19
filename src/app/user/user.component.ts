@@ -25,7 +25,7 @@ export class UserComponent implements OnInit {
         else if (form.value.role === "teacher") this.router.navigateByUrl('/teacher/profile');
       },
       err => {
-        if (err.status === 422) {
+        if (err.status === 409 || err.status === 403) {
           this.msg = err.error.message;
         }
         else

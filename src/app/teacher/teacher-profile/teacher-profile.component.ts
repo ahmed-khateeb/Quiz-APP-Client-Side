@@ -68,14 +68,17 @@ export class TeacherProfileComponent implements OnInit {
   }
 
   deleteQuiz(quiz_id) {
-    this.quizService.deleteQuiz(quiz_id).subscribe(res=>{
-      console.log(res)
-      this.getPendingQuiz();
-      this.getPublishedQuiz();
-    },
-    err => {
-      this.errMsg = err.error.message
-    })
+    let sure = confirm("Delete This Quiz with all its content")
+    if(sure){
+      this.quizService.deleteQuiz(quiz_id).subscribe(res=>{
+        console.log(res)
+        this.getPendingQuiz();
+        this.getPublishedQuiz();
+      },
+      err => {
+        this.errMsg = err.error.message
+      })
+    }
   }
   ngOnInit() {
     this.getTeacherDetails();

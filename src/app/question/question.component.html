@@ -1,0 +1,67 @@
+<link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+<script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
+<script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
+<!------ Include the above in your HEAD tag ---------->
+
+<div class="container-fluid bg-info">
+  
+    <div class="modal-dialog">
+      <div class="modal-content">
+         <div class="modal-header">
+            <h3><span class="label label-warning" id="qid">{{ number }}</span> {{ question.title }} </h3>
+        </div>
+        <div class="modal-body">
+
+          <div class="quiz" data-toggle="buttons" *ngFor="let answer of answers; let i = index">
+           <label class="element-animation1 btn btn-lg btn-primary btn-block">
+             <span class="btn-label"><i class="glyphicon glyphicon-chevron-right"></i></span>
+             <input type="radio" name="q_answer" value="1">{{answer.title}}
+             <span *ngIf="role=='teacher' && answer.is_correct" class="btn-label-right"><i class="glyphicon glyphicon-ok"></i></span>
+             <span *ngIf="role=='teacher' && !answer.is_correct" class="btn-label-right"><i class="glyphicon glyphicon-remove"></i></span>
+           </label>
+          </div>
+        </div>
+        <div class="modal-footer text-muted">
+          <span id="answer"></span>
+        </div>
+        <form *ngIf="quiz_status == 'pending'" #answerForm1="ngForm" (ngSubmit)="answerForm1.valid && onSubmit(answerForm1)">
+            <div class="form-group" style="padding: 0 10px;">
+                <input type="text" required class="form-control" #title="ngModel" name="title"
+                 placeholder="Enter Quiz Name" [(ngModel)]="answerTitle">
+                 <input type="hidden" name="question_id" [(ngModel)]="question._id">
+            </div>
+            <div style="padding: 0 15px;" *ngIf="(answerForm1.touched || answerForm1.submitted) && title.errors">
+                <label *ngIf="title.errors.required" class="validation-message">Answer is required.</label>
+            </div>
+
+            <fieldset class="form-group">
+                <div class="row" style="padding: 0 25px;">
+                  <legend class="col-form-label col-sm-2 pt-0">Type</legend>
+                  <div class="col-sm-10">
+                    <div class="form-check">
+                      <input class="form-check-input" id="correct{{number}}" type="radio" required #is_correct="ngModel" name="is_correct" [(ngModel)]="correct" value="true">
+                      <label class="form-check-label" for="correct{{number}}" style="padding: 0 25px;">
+                        Correct
+                      </label>
+                    </div>
+                    <div class="form-check">
+                      <input class="form-check-input" id="wrong{{number}}" type="radio" required #is_correct="ngModel" name="is_correct" [(ngModel)]="correct" value="false">
+                      <label class="form-check-label" for="wrong{{number}}" style="padding: 0 25px;">
+                        Wrong
+                      </label>
+                    </div>
+                  </div>
+                </div>
+              </fieldset>
+              <div style="padding: 0 15px;" *ngIf="(answerForm1.touched || answerForm1.submitted) && is_correct.errors">
+                <label *ngIf="is_correct.errors.required" class="validation-message">Type is required.</label>
+            </div>
+            <p *ngIf="!hasCorrectAnswer.hasCorrect" style="color: red; padding: 0 15px;">This Question Does not have a correct answer yet</p>
+            <p style="color: red; padding: 0 15px;">{{ errMsg }}</p>
+            <div class="col view"><button type="submit" class="btn btn-primary">Add Answer</button></div>
+          </form>
+          <br>
+      </div>
+    </div>
+  
+</div>

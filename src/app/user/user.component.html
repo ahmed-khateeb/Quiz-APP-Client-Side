@@ -1,0 +1,62 @@
+<div class="wrapper fadeInDown">
+  <div id="formContent">
+    <!-- Tabs Titles -->
+
+    <h2 *ngIf="(register == true)">Registeration Form</h2>
+    <h2 *ngIf="(register == false)">Login Form</h2>
+
+    <!-- Login & Register Form -->
+    <form #userForm="ngForm">
+
+      <input type="text" required [pattern]="emailRegex" #email="ngModel" name="email" placeholder="Email"
+      [(ngModel)]="User.email" >
+      <div *ngIf="userForm.touched && email.errors">
+          <label *ngIf="email.errors.required" class="validation-message">This field is required.</label>
+          <label *ngIf="email.errors.pattern" class="validation-message">Invalid email address.</label>
+      </div>
+
+      <!-- Add Name Field if it is in registeration form -->
+      <div *ngIf="(register == true)">
+        <input type="text" required #username="ngModel" name="name" placeholder="Name"
+        [(ngModel)]="User.name">
+        
+        <div *ngIf="userForm.touched  && username.errors">
+            <label *ngIf="username.errors.required" class="validation-message">Name is required.</label>
+        </div>
+      </div>  
+
+      <input type="password" required #password="ngModel" name="password" placeholder="password"
+      [(ngModel)]="User.password">
+
+      <div *ngIf="userForm.touched  && password.errors">
+          <label *ngIf="password.errors.required" class="validation-message">Password is required.</label>
+      </div>
+
+
+      <br><br>
+      <input type="radio" required #role="ngModel" id="teacher" name="role" [(ngModel)]="User.role" value="teacher">
+       <label for="teacher"> Teacher</label>
+      <br>
+      <input type="radio" required #role="ngModel" id="student" name="role" [(ngModel)]="User.role" value="student">
+      <label for="student"> Student</label>
+      <br>
+
+      <div *ngIf="userForm.submitted && role.errors">
+          <label *ngIf="role.errors.required" class="validation-message">The Role is required.</label>
+      </div>
+
+
+      <input type="submit" class="fadeIn second" value="Reigster" [disabled]="userForm.form.invalid" *ngIf="(register == true)" (click)="signUp(userForm)">
+      <input type="submit" class="fadeIn second" value="Log In" [disabled]="userForm.form.invalid" *ngIf="(register == false)" (click)="signIn(userForm)">
+      <hr>
+    </form>
+    <div class="alert alert-warning" role="alert" [textContent]="msg" *ngIf="(msg)">
+         
+    </div>
+    <div id="formFooter">
+      <p class="underlineHover" (click)="register=true" *ngIf="(register == false)">Don't have Account ? Register Now</p>
+      <p class="underlineHover" (click)="register=false" *ngIf="(register == true)">Already have Account ? Login Now</p>
+    </div>
+
+  </div>
+</div>

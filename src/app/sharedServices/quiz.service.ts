@@ -17,6 +17,10 @@ export class QuizService {
   findQuiz(quiz_id) {
     return this.http.get<Quiz>(environment.apiBaseUrl + '/quiz/' + quiz_id )
   }
+
+  deleteQuiz(quiz_id) {
+    return this.http.delete<Quiz>(environment.apiBaseUrl + '/quiz/' + quiz_id )
+  }
   publishQuiz(quiz_id) {
     return this.http.put<Quiz>(environment.apiBaseUrl + '/quiz/updateStatus', {"quiz_id": quiz_id})
   }

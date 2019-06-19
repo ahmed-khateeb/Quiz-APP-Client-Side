@@ -3,12 +3,13 @@
 <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
 <!------ Include the above in your HEAD tag ---------->
 
-<div class="container-fluid bg-info">
+<div *ngIf="question != null" class="container-fluid bg-info">
   
     <div class="modal-dialog">
       <div class="modal-content">
-         <div class="modal-header">
+        <div class="modal-header">
             <h3><span class="label label-warning" id="qid">{{ number }}</span> {{ question.title }} </h3>
+            <button *ngIf="role=='teacher' && quiz_status != 'published'" (click)="deleteQuestion()" class="btn btn-danger" style="margin-top: 20px;">Delete This Question</button>
         </div>
         <div class="modal-body">
 
@@ -16,8 +17,9 @@
            <label class="element-animation1 btn btn-lg btn-primary btn-block">
              <span class="btn-label"><i class="glyphicon glyphicon-chevron-right"></i></span>
              <input type="radio" name="q_answer" value="1">{{answer.title}}
-             <span *ngIf="role=='teacher' && answer.is_correct" class="btn-label-right"><i class="glyphicon glyphicon-ok"></i></span>
-             <span *ngIf="role=='teacher' && !answer.is_correct" class="btn-label-right"><i class="glyphicon glyphicon-remove"></i></span>
+             <span *ngIf="role=='teacher' && answer.is_correct" class="btn-label-right"><i class="glyphicon glyphicon-thumbs-up"></i></span>
+             <span *ngIf="role=='teacher' && !answer.is_correct" class="btn-label-right"><i class="glyphicon glyphicon-thumbs-down"></i></span>
+             <span *ngIf="role=='teacher'" (click)="removeAnswer(answer._id)" class="btn-label-delete"><i class="glyphicon glyphicon-remove"></i></span>
            </label>
           </div>
         </div>

@@ -66,6 +66,17 @@ export class TeacherProfileComponent implements OnInit {
   goToQuiz(quiz_id) {
     this.router.navigate(["/quiz", quiz_id]);
   }
+
+  deleteQuiz(quiz_id) {
+    this.quizService.deleteQuiz(quiz_id).subscribe(res=>{
+      console.log(res)
+      this.getPendingQuiz();
+      this.getPublishedQuiz();
+    },
+    err => {
+      this.errMsg = err.error.message
+    })
+  }
   ngOnInit() {
     this.getTeacherDetails();
 

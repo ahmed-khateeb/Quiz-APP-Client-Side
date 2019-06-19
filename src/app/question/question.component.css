@@ -41,11 +41,21 @@
   
   label .btn-label-right {
     position: absolute;
-    right: 0;
+    right: 40px;
     top: 0;
     display: inline-block;
     padding: 0 10px;
     background: rgba(0,0,0,.15);
+    height: 100%
+}
+
+label .btn-label-delete {
+    position: absolute;
+    right: 0px;
+    top: 0;
+    display: inline-block;
+    padding: 0 10px;
+    background: rgba(236, 7, 7);
     height: 100%
 }
   label .glyphicon {

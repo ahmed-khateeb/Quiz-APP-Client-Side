@@ -23,6 +23,10 @@ export class AuthInterceptor implements HttpInterceptor {
                     event => { },
                     err => {
                         console.log(err)
+                        // if(err.status = 422) {
+                        //     this.userService.deleteToken();
+                        //     this.router.navigate(['/user']);
+                        // }
                         //this.router.navigateByUrl('/user');
                     })
             );

@@ -18,7 +18,7 @@ export class AnswerService {
   }
 
   removeAnswer(answer_id) {
-    return this.http.delete(environment.apiBaseUrl + '/answers/delete/' + answer_id);
+    return this.http.delete(environment.apiBaseUrl + '/answers/' + answer_id);
   }
 
   updateAnswer(answer) {

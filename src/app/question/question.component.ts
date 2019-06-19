@@ -43,6 +43,36 @@ export class QuestionComponent implements OnInit {
       }
     )
   }
+
+  deleteQuestion() {
+    let sure = confirm("DO You Want to delete This Question");
+    if(sure) {
+      this.questionService.removeQuestion(this.question._id).subscribe(res=>{
+        console.log(res)
+        this.question=null
+      },
+      err => {
+        this.errMsg = err.error.message
+      })
+    }
+    
+  }
+
+  removeAnswer(ans_id) {
+    let sure = confirm("DO You Want to delete This Answer");
+    if(sure) {
+      this.answerService.removeAnswer(ans_id).subscribe(res=>{
+        console.log(res)
+        this.hasCorrect();
+        this.getAnswers();
+      },
+      err => {
+        this.errMsg = err.error.message
+      })
+    }
+    
+  }
+
   onSubmit(form: NgForm) {
     this.errMsg= ""
     this.answerService.addAnswer(form.value).subscribe(res=>{

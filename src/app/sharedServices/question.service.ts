@@ -19,7 +19,7 @@ export class QuestionService {
   }
   //Teacher Pending Quizzes
   removeQuestion(question_id) {
-    return this.http.delete(environment.apiBaseUrl + '/questions/delete/' + question_id);
+    return this.http.delete(environment.apiBaseUrl + '/questions/' + question_id);
   }
 
   hasCorrectAnswer(question_id){

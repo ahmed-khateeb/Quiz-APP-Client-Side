@@ -69,7 +69,8 @@
                                           <div class="col">{{ pending.title }}</div>
                                       </div>
                                   </div>
-                                  <div class="col view"><button (click)="goToQuiz(pending._id)" class="btn btn-primary">View</button></div>
+                                  <div class="col view"><button (click)="goToQuiz(pending._id)" class="btn btn-primary">View </button></div> &nbsp;
+                                  <div class="col view"><button (click)="deleteQuiz(pending._id)" class="btn btn-danger">Delete</button></div>
                               </div>
                           </li>
                       </ul>

@@ -3,7 +3,7 @@ import { QuestionService } from './../sharedServices/question.service';
 import { Router } from '@angular/router';
 import { AnswerService } from './../sharedServices/answer.service';
 import { Question } from './question.model';
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { NgForm } from '@angular/forms';
 
 @Component({
@@ -17,7 +17,7 @@ export class QuestionComponent implements OnInit {
   errMsg;
   index = 1;
   correct;
-  hasCorrectAnswer:any = {hascorrect: false};
+  hasCorrectAnswer:any = {hasCorrect: false};
 
   role = this.userService.getUserPayload().role;
 
@@ -36,7 +36,8 @@ export class QuestionComponent implements OnInit {
   hasCorrect() {
     this.questionService.hasCorrectAnswer(this.question._id).subscribe(res => {
       this.hasCorrectAnswer = res
-      console.log(this.hasCorrectAnswer)
+      this.fireEvent({number:this.number,correct:res})
+      // console.log(this.hasCorrectAnswer)
     }, 
       err => {
         console.log(err)
@@ -93,6 +94,11 @@ export class QuestionComponent implements OnInit {
   @Input() public question: Question;
   @Input() public number: number;
   @Input() public quiz_status: string;
+  @Output() public questionEvent = new EventEmitter();
+
+  fireEvent(question_state) {
+    this.questionEvent.emit(question_state)
+  }
   ngOnInit() {
     this.hasCorrect()
     this.getAnswers()

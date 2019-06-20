@@ -41,13 +41,13 @@
       <label for="student"> Student</label>
       <br>
 
-      <div *ngIf="userForm.submitted && role.errors">
+      <div *ngIf="userForm.touched && role.errors">
           <label *ngIf="role.errors.required" class="validation-message">The Role is required.</label>
       </div>
 
 
-      <input type="submit" class="fadeIn second" value="Reigster" [disabled]="userForm.form.invalid" *ngIf="(register == true)" (click)="signUp(userForm)">
-      <input type="submit" class="fadeIn second" value="Log In" [disabled]="userForm.form.invalid" *ngIf="(register == false)" (click)="signIn(userForm)">
+      <input type="submit" class="fadeIn second" value="Reigster" *ngIf="(register == true)" (click)="signUp(userForm)">
+      <input type="submit" class="fadeIn second" value="Log In" *ngIf="(register == false)" (click)="signIn(userForm)">
       <hr>
     </form>
     <div class="alert alert-warning" role="alert" [textContent]="msg" *ngIf="(msg)">

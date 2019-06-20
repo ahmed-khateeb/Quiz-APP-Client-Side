@@ -68,6 +68,6 @@
       </div> 
     </div>
     <div *ngFor="let question of quiz_questions; let i = index">
-      <app-question [question]="question" [number]="i+1" [quiz_status]="quiz.status"></app-question>
+      <app-question (questionEvent)="check_state($event)" [question]="question" [number]="i+1" [quiz_status]="quiz.status"></app-question>
     </div>
 </div>

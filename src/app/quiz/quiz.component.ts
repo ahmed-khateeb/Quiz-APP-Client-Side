@@ -26,7 +26,7 @@ export class QuizComponent implements OnInit {
   getQuiz() {
     this.quizService.findQuiz(this.quiz_id).subscribe(res => {
       this.quiz = res
-      console.log(res)
+      // console.log(res)
     },
     err => {
       this.errMsg = err.error.message;      
@@ -35,7 +35,7 @@ export class QuizComponent implements OnInit {
   getQuestions() {
     this.questionService.getQuizQuestions(this.quiz_id).subscribe(res => {
       this.quiz_questions = res
-      console.log(res)
+      // console.log(res)
     },
     err => {
       this.router.navigate(["**"])
@@ -72,25 +72,33 @@ export class QuizComponent implements OnInit {
   publish() {
     let sure = confirm('Once You publish This Quiz You Will not be able to Edit it\nDo you want to publish ?')
     if(sure){
-      // this.quiz_questions.forEach( (question) => {
-      //     this.questionhasCorrect(question);
-      // });
-      // console.log(this.canPublish.length)
-      // let check = true;
-      // for(let i=0;i< this.canPublish.length; i++) {
-      //   console.log(this.canPublish[i].hasCorrect)
-      // }
-      // return;
-      this.quizService.publishQuiz(this.quiz_id).subscribe(res => {
-        this.quiz = res
-      },
-      err => {
-        console.log(err.error)
-        this.errMsg = err.error; 
-      })
+      let publishable = true;
+      this.canPublish.forEach((elm) => {
+          if(elm.hasCorrect === false) {
+            publishable = false
+          }
+      });
+      console.log(publishable)
+      if(!publishable) {
+        alert('Please Make Sure that Every Question has at least 1 correct answer')
+        return;
+      }
+      else{
+        this.quizService.publishQuiz(this.quiz_id).subscribe(res => {
+          this.quiz = res
+        },
+        err => {
+          console.log(err.error)
+          alert(err.error.message) 
+        })
+      }
     }
   }
 
+  check_state(is_correct) {
+    this.canPublish[is_correct.number-1]= is_correct.correct
+    console.log(this.canPublish)
+  }
   Logout() {
     this.userService.deleteToken();
     this.router.navigate(['/user']);

@@ -19,7 +19,7 @@
              <input type="radio" name="q_answer" value="1">{{answer.title}}
              <span *ngIf="role=='teacher' && answer.is_correct" class="btn-label-right"><i class="glyphicon glyphicon-thumbs-up"></i></span>
              <span *ngIf="role=='teacher' && !answer.is_correct" class="btn-label-right"><i class="glyphicon glyphicon-thumbs-down"></i></span>
-             <span *ngIf="role=='teacher'" (click)="removeAnswer(answer._id)" class="btn-label-delete"><i class="glyphicon glyphicon-remove"></i></span>
+             <span *ngIf="role=='teacher' && quiz_status=='pending'" (click)="removeAnswer(answer._id)" class="btn-label-delete"><i class="glyphicon glyphicon-remove"></i></span>
            </label>
           </div>
         </div>

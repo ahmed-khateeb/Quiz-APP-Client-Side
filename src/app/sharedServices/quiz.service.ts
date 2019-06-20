@@ -15,7 +15,7 @@ export class QuizService {
   }
 
   findQuiz(quiz_id) {
-    return this.http.get<Quiz>(environment.apiBaseUrl + '/quiz/' + quiz_id )
+    return this.http.get<Quiz>(environment.apiBaseUrl + '/quiz/get/' + quiz_id )
   }
 
   deleteQuiz(quiz_id) {

@@ -29,7 +29,7 @@
         <form *ngIf="quiz_status == 'pending'" #answerForm1="ngForm" (ngSubmit)="answerForm1.valid && onSubmit(answerForm1)">
             <div class="form-group" style="padding: 0 10px;">
                 <input type="text" required class="form-control" #title="ngModel" name="title"
-                 placeholder="Enter Quiz Name" [(ngModel)]="answerTitle">
+                 placeholder="Enter Answer Body" [(ngModel)]="answerTitle">
                  <input type="hidden" name="question_id" [(ngModel)]="question._id">
             </div>
             <div style="padding: 0 15px;" *ngIf="(answerForm1.touched || answerForm1.submitted) && title.errors">
